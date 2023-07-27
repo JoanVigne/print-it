@@ -23,25 +23,7 @@ const arrow_left = arrow[0];
 const arrow_right = arrow[1];
 arrow_left.addEventListener("click", () => console.log("ok left"));
 arrow_right.addEventListener("click", () => console.log("ok right"));
-//* fin EVENT SUR LES FLECHES
-
-/* .dots {
-  position: absolute;
-  bottom: 40px;
-  display: flex;
-}
-.dot {
-  margin-inline: 5px;
-  width: 13px;
-  height: 13px;
-  background-color: #ffffff00;
-  border: 3px solid #fff;
-  border-radius: 100%;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-.dot_selected {
-  background-color: #fff;
-} */
+// fin EVENT SUR LES FLECHES
 
 //* creation des bullet points
 const dotContainer = document.getElementsByClassName("dots")[0];
@@ -49,6 +31,12 @@ for (let i = 0; i < slides.length; i++) {
   const dot = document.createElement("div");
   dot.setAttribute("class", `dot`);
   dotContainer.appendChild(dot);
-  console.log("les i", i);
-  console.log("le dotcontainer", dotContainer);
 }
+//* .dot_selected
+const lesDots = document.getElementsByClassName("dot");
+console.log("les dots: ", lesDots);
+lesDots[0].classList.add("dot_selected");
+/* lesDots[0].classList.remove("dot_selected"); */
+
+const imgEnCours = document.getElementsByClassName("banner-img")[0];
+console.log(imgEnCours.src);
