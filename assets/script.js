@@ -21,29 +21,29 @@ const slides = [
 const arrow = document.getElementsByClassName("arrow");
 const arrow_left = arrow[0];
 const arrow_right = arrow[1];
-arrow_left.addEventListener("click", () => changeImageGauche());
-arrow_right.addEventListener("click", () => changeImageDroite());
+/* arrow_left.addEventListener("click", () => changeImageGauche());
+arrow_right.addEventListener("click", () => changeImageDroite()); */
 // fin EVENT SUR LES FLECHES
 
 //* creation des bullet points
-const dotContainer = document.getElementsByClassName("dots")[0];
-for (let i = 0; i < slides.length; i++) {
+/* const dotContainer = document.getElementsByClassName("dots")[0];
+ for (let i = 0; i < slides.length; i++) {
   const dot = document.createElement("div");
   dot.setAttribute("class", `dot`);
   dotContainer.appendChild(dot);
-}
+} */
 //* .dot_selected
-const lesDots = document.getElementsByClassName("dot");
-
-lesDots[0].classList.add("dot_selected");
+/* const lesDots = document.getElementsByClassName("dot"); */
+/* lesDots[0].classList.add("dot_selected"); */
 /* lesDots[0].classList.remove("dot_selected"); */
 
 const imgEnCours = document.getElementsByClassName("banner-img")[0];
-console.log(imgEnCours.nextElementSibling);
 
-//* changer d'image
+//*! var global, Single source of truth
+let index = 0;
 
-function changeImageDroite() {
+//* changer d'image 1ere version de function
+/* function changeImageDroite() {
   switch (imgEnCours.src) {
     case `http://localhost:8080/assets/images/slideshow/slide1.jpg`:
       imgEnCours.src = `http://localhost:8080/assets/images/slideshow/slide2.jpg`;
@@ -76,7 +76,6 @@ function changeImageDroite() {
       break;
   }
 }
-
 function changeImageGauche() {
   switch (imgEnCours.src) {
     case `http://localhost:8080/assets/images/slideshow/slide1.jpg`:
@@ -109,4 +108,61 @@ function changeImageGauche() {
       console.log("error");
       break;
   }
-}
+} */
+
+//* changer d'image, 2eme version de function vu avec mentor
+
+const imgBannerElement = document.querySelector(".banner-img");
+const pBannerElement = document.querySelector("#banner p");
+// changer l'image
+const changeBannerElement = () => {
+  imgBannerElement.src = `./assets/images/slideshow/${slides[index].image}`;
+  pBannerElement.innerHTML = slides[index].tagLine;
+};
+// creation dots
+const dotContainer = document.getElementsByClassName("dots")[0];
+slides.forEach((slide, i) => {
+  const dotEle = document.createElement("span");
+  dotEle.classList.add("dot");
+  if (i === index) {
+    dotEle.classList.add("dot_selected");
+  }
+  // ajout du clic sur les dots pour changer d'image
+  dotEle.addEventListener("click", () => {
+    index = i;
+    changeBannerElement();
+    changeCssDotElement();
+  });
+  dotContainer.appendChild(dotEle);
+});
+
+// dot selected one
+const changeCssDotElement = () => {
+  const lesDots = document.querySelectorAll(".dot");
+
+  lesDots.forEach((dot, i) => {
+    dot.classList.remove("dot_selected");
+    if (i === index) {
+      dot.classList.add("dot_selected");
+    }
+  });
+};
+
+// event listener
+arrow_right.addEventListener("click", () => {
+  index++;
+  if (index >= slides.length) {
+    index = 0;
+  }
+  changeBannerElement();
+  changeCssDotElement();
+});
+
+arrow_left.addEventListener("click", () => {
+  index--;
+  if (index < 0) {
+    index = slides.length - 1;
+  }
+  changeBannerElement();
+  changeCssDotElement();
+});
