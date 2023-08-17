@@ -21,21 +21,6 @@ const slides = [
 const arrow = document.getElementsByClassName("arrow");
 const arrow_left = arrow[0];
 const arrow_right = arrow[1];
-/* arrow_left.addEventListener("click", () => changeImageGauche());
-arrow_right.addEventListener("click", () => changeImageDroite()); */
-// fin EVENT SUR LES FLECHES
-
-//* creation des bullet points
-/* const dotContainer = document.getElementsByClassName("dots")[0];
- for (let i = 0; i < slides.length; i++) {
-  const dot = document.createElement("div");
-  dot.setAttribute("class", `dot`);
-  dotContainer.appendChild(dot);
-} */
-//* .dot_selected
-/* const lesDots = document.getElementsByClassName("dot"); */
-/* lesDots[0].classList.add("dot_selected"); */
-/* lesDots[0].classList.remove("dot_selected"); */
 
 const imgEnCours = document.getElementsByClassName("banner-img")[0];
 
